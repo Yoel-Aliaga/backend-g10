@@ -96,4 +96,59 @@ INSERT INTO tareas (id, titulo, descripcion, usuario_id)VALUES (DEFAULT,'Ir a co
 SELECT * FROM tareas WHERE usuario_id=1;
 
 
+-- buscar una palabra o palabras dentro de un texto
+SELECT * FROM usuarios WHERE nombre LIKE '%O';
+
+-- Hace la comparacion a nivel de caracteres ASCII
+SELECT * FROM usuarios WHERE nombre LIKE BINARY 'J%';
+
+
+SELECT * FROM usuarios WHERE nombre LIKE '__u%';
+SELECT * FROM usuarios WHERE nombre NOT LIKE '__u%';
+
+SELECT * FROM tareas;
+-- Ahora insertamos una tabla sin dueño
+INSERT INTO tareas (id, titulo, descripcion, usuario_id) VALUES (DEFAULT, 'No hacer nada', 'no hacer nada porque es domingo',null);
+INSERT INTO tareas (id, titulo, descripcion, usuario_id) VALUES (DEFAULT, 'no hacer nada', 'no hacer nada porque es domingo', null);
+
+SELECT * FROM tareas;
+-- Unir dos tablas  : Interseccion entre la tabla usuarios con la tabla tareas donde usuarios.id 
+SELECT * FROM usuarios INNER JOIN tareas ON usuarios.id = tareas.usuario_id;
+
+-- Devuelve todos los usuarios de la izquierda pero a la derecha solo devuelve los que tienen tareas sino los devuelve como null
+SELECT * FROM usuarios LEFT JOIN tareas ON usuarios.id = tareas.usuario_id;
+SELECT * FROM usuarios RIGHT JOIN tareas ON usuarios.id = tareas.usuario_id;
+
+-- FULL OUTER JOIN no existe entonces usamos UNION
+-- UNION Mezcla o combina las dos o mas consultas en una sola 'tabla virtual' 
+-- pero ambas consultas deben tener el mismo numero de columnas
+SELECT * FROM usuarios LEFT JOIN tareas ON usuarios.id = tareas.usuario_id UNION 
+SELECT * FROM usuarios RIGHT JOIN tareas ON usuarios.id = tareas.usuario_id;
+
+SELECT nombre FROM usuarios UNION
+SELECT titulo FROM tareas;
+
+-- CONCATENAR = JUNTAR O COMBINAR
+-- AS pone un alias al titulo de la columa 
+-- si el alias es compuesto osea dos nombres se pone entre comillas simples
+-- OJO en base de datos NO SE USAN COMILLAS DOBLES solo simples
+SELECT CONCAT(titulo, ' ', descripcion) AS 'nombre completo' FROM tareas;
+
+SELECT * FROM usuarios;
+-- EJERCICIOS
+-- 1.- Devolver todos los usuarios que sus DNI contengan el numero 5 
+SELECT * FROM usuarios WHERE dni LIKE '%5%';
+-- 2.- Devolver todos los usuarios cuyo DNI tengan el tercer digito 8
+SELECT * FROM usuarios WHERE dni LIKE '__8%';
+-- 3.- Devolver todas las tareas del usuario 'Eduardo'
+SELECT * FROM usuarios INNER JOIN tareas ON usuarios.id = tareas.usuario_id WHERE nombre = 'Eduardo';
+
+
+
+
+
+
+
+
+
 
