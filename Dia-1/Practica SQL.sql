@@ -110,6 +110,46 @@ SELECT * FROM productos WHERE fecha_vencimiento < '2022-08-01';
 
 SELECT CONCAT(nombre, ' ' ,imagen ) AS 'producto imagen' FROM productos;
 
+-- 4.- Devolver todos los productos de la categoria frutas
+
+SELECT p.* FROM productos AS p INNER JOIN categorias AS c ON p.categoria_id = c.id Where c.nombre = 'Frutas';
+
+-- 5.- Devolcver el nombre de la categoria, el nombre del producto y el precio del producto si es mayor a 10
+
+SELECT c.nombre AS 'Categoria Nombre',
+	   p.nombre AS 'Producto Nombre',
+       p.precio 
+FROM productos AS p INNER JOIN categorias AS c ON p.categoria_id = c.id 
+WHERE p.PRECIO > 10 ;
+
+-- 6.- Devolver loa almacanes con sus productos 
+
+SELECT * FROM almacenes AS a INNER JOIN almacen_producto AS ap ON a.id = ap.almacen_id 
+							 INNER JOIN productos AS p ON ap.producto_id = p.id;
+
+
+-- 7.- Mostrar lo siguiente :
+-- Tabla categoria : El nombre 
+-- Tabla productos: Nombre y precio
+-- Tabla almacenes : Nombre y direccion 
+
+SELECT c.nombre, p.nombre, p.precio, a.nombre,a.direccion 
+ FROM categorias as c 
+	INNER JOIN productos AS p ON c.id = p.categorias_id 
+	 INNER JOIN almacen_producto AS ap ON p.id = ap.producto_id
+     INNER JOIN almacenes AS a ON ap.almacen_id = a.id;
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
