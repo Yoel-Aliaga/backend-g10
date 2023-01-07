@@ -1,0 +1,4 @@
+pip freeze > requierement.txt => El output (lo que muestra) el comando lo guardara en e archivo 'requierement.txt' si 
+no existe el archivo lo creara, caso contrario lo reescribira
+
+pip install -r requierement.txt => Instala todas las librerias listadas en  un archivo de texto
